@@ -20,20 +20,26 @@ rule(hearAndRemember,
 run :-
     assert_initial_facts,
     repeat,
+    print_state,
     ( bagof(rule(RuleName, (Antecedent -> Consequent)),
 	  (rule(RuleName, (Antecedent -> Consequent)), antecedent_holds(Antecedent)),
 	  ApplicableRules) ->
 	  forall(member(rule(RuleName, (Antecedent -> Consequent)), ApplicableRules),
 		 (
-		     write('applying rule '), write(RuleName), nl,
 		     consume(Antecedent),
-		     establish(Consequent)
+		     establish(Consequent),
+		     write('Applied: '), write(RuleName), nl
 		 )),
 	  fail
      ; true ).
 
 assert_initial_facts :-
     forall(initial(Proposition), assert(fact(Proposition))).
+
+print_state :-
+    write('-------------------\nState:\n'),
+    forall(fact(Fact), (write('  '), write(Fact), nl)),
+    nl.
 
 antecedent_holds(Antecedent) :-
     fact(Antecedent).
