@@ -8,9 +8,13 @@ initial(qud([])).
 
 start :: (start -> heard(ask(question(user, road, R, pick(route, R, home))), user, system)).
 
-hearnAdRemember :: ([heard(M, X, Y),
+hearAndRemember :: ([heard(M, X, Y),
 		     moves(Ms),
 		     has_turn(X)] ->
 			[moves([M|Ms]),
-			 pending(M),
+			 pending(M, X, Y),
 			 has_turn(Y)]).
+
+pushQUD :: ([pending(ask(Q), _, _),
+	     qud(Qs)] ->
+		qud([Q|Qs])).
