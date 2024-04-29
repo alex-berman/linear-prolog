@@ -22,6 +22,13 @@ pushQUD :: ([pending(ask(Q), _, _),
 		qud([Q|Qs])).
 
 
+produceAnswerShort :: ([qud([question(user, A, X, P)|Qs]),
+			^P] ->
+			   [agenda(shortAnswer(A, X, system, user)),
+			    qud(Qs),
+			    answered(question(user, A, X, P))]).
+
+
 % === DOMAIN KNOWLEDGE ===
 
 % knowledge base	
