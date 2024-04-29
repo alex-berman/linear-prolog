@@ -3,6 +3,9 @@
 
 _ :: start.
 start :: (start -> heard(ask(question(user, road, R, pick(route(R, home)))), user, system)).
+whyShort :: (utter(shortAnswer(road, bypass), system, user) ->
+		 heard(ask(question(user, reason, T, topos(T))), user, system)).
+
 
 % initial state
 ready :: hasTurn(user).
