@@ -33,14 +33,20 @@ counterGreeting :: ([^hasTurn(X),
 		     pending(greet, Y, X)] ->
 			[agenda(counterGreet, X, Y)]).
 
-processAssert :: ([pending(assert(P), DP1, DP),
-		   qud([question(DP, A, X, P)|Qs])] ->
+processAssert :: ([pending(assert(P), _, DP),
+		   qud([question(DP, _, _, P)|Qs])] ->
 		      [userFact(P),
 		       qud(Qs)]).
 
 pushQUD :: ([pending(ask(Q), _, _),
 	     qud(Qs)] ->
 		qud([Q|Qs])).
+
+produceAnswer :: ([qud([question(user, A, X, P)|Qs]),
+		   !P] ->
+		      [agenda(shortAnswer(A, X), system, user),
+		       qud(Qs),
+		       answered(question(user, A, X, P))]).
 
 produceCR :: ([^qud([question(user, _, _, P)|_]),
 	       ?P] -> cr).
