@@ -1,12 +1,14 @@
 :- use_module(engine).
 :- ensure_loaded(operators).
 
-initial(start).
-initial(has_turn(user)).
-initial(moves([])).
-initial(qud([])).
-
+_ :: start.
 start :: (start -> heard(ask(question(user, road, R, pick(route, R, home))), user, system)).
+
+% initial state
+ready :: has_turn(user).
+noMoves :: moves([]).
+noQud :: qud([]).
+
 
 hearAndRemember :: ([heard(M, X, Y),
 		     moves(Ms),
