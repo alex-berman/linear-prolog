@@ -20,3 +20,14 @@ hearAndRemember :: ([heard(M, X, Y),
 pushQUD :: ([pending(ask(Q), _, _),
 	     qud(Qs)] ->
 		qud([Q|Qs])).
+
+
+% === DOMAIN KNOWLEDGE ===
+
+% knowledge base	
+d1 :: route(bypass, home).
+d2 :: route(parkLane, home).
+d3 :: route(bridgeRoute, home).
+r1 :: shortest(route(bypass, home)).
+r2 :: cheapest(route(parkLane, home)).
+r3 :: prettiest(route(bridgeRoute, home)).
