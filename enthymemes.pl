@@ -2,7 +2,7 @@
 :- ensure_loaded(operators).
 
 _ :: start.
-start :: (start -> heard(ask(question(user, road, R, pick(route, R, home))), user, system)).
+start :: (start -> heard(ask(question(user, road, R, pick(route(R, home)))), user, system)).
 
 % initial state
 ready :: has_turn(user).
@@ -31,3 +31,10 @@ d3 :: route(bridgeRoute, home).
 r1 :: shortest(route(bypass, home)).
 r2 :: cheapest(route(parkLane, home)).
 r3 :: prettiest(route(bridgeRoute, home)).
+
+toposShorter :: ([^qud([question(user, road, X, pick(route(X, Y)))|_]),
+		  route(X, Y),
+		  ^shortest(route(X, Y))] ->
+		     [pick(route(X, Y)),
+		      topos(shortest(route, X, Y)),
+		      enthymeme(shortest, pickRoute(X, Y))]).
