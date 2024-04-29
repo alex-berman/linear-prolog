@@ -1,6 +1,7 @@
 :- use_module(engine).
 :- ensure_loaded(operators).
 
+% simulating user moves
 _ :: start.
 start :: (start -> heard(ask(question(user, road, R, pick(route(R, home)))), user, system)).
 whyShort :: (utter(shortAnswer(road, bypass), system, user) ->
