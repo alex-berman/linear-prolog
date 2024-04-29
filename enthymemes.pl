@@ -5,17 +5,24 @@ _ :: start.
 start :: (start -> heard(ask(question(user, road, R, pick(route(R, home)))), user, system)).
 
 % initial state
-ready :: has_turn(user).
+ready :: hasTurn(user).
 noMoves :: moves([]).
 noQud :: qud([]).
 
 
+utterAndRemember :: ([agenda(M, X, Y),
+		      moves(Ms),
+		      hasTurn(X)] ->
+			 [utter(M, X, Y),
+			  moves([(M, X, Y)|Ms]),
+			  hasTurn(Y)]).
+
 hearAndRemember :: ([heard(M, X, Y),
 		     moves(Ms),
-		     has_turn(X)] ->
+		     hasTurn(X)] ->
 			[moves([M|Ms]),
 			 pending(M, X, Y),
-			 has_turn(Y)]).
+			 hasTurn(Y)]).
 
 pushQUD :: ([pending(ask(Q), _, _),
 	     qud(Qs)] ->
@@ -24,7 +31,7 @@ pushQUD :: ([pending(ask(Q), _, _),
 
 produceAnswerShort :: ([qud([question(user, A, X, P)|Qs]),
 			^P] ->
-			   [agenda(shortAnswer(A, X, system, user)),
+			   [agenda(shortAnswer(A, X), system, user),
 			    qud(Qs),
 			    answered(question(user, A, X, P))]).
 
