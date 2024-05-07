@@ -1,13 +1,5 @@
-:- use_module(engine).
 :- ensure_loaded(operators).
-
-% simulating user moves
-start :: heard(greet, user, system).
-q1 :: (utter(counterGreet, system, user) ->
-	   heard(ask(question(user, time, T, tt(_, T, gotaplatsen, _))), user, system)).
-q2b :: (utter(ask(question(system, bus, N0, wantBus(N0))), system, user) ->
-	    heard(assert(wantBus(b55)), user, system)).
-
+:- use_module(coverage_testing).
 
 % initial state
 ready :: hasTurn(user).
@@ -64,3 +56,6 @@ specificCR :: ([cr,
 			 question(user, time, T, tt(N, T, S, D))|Qs]),
 		    agenda(ask(question(system, bus, N, wantBus(N))), system, user)]).
 
+
+test :-
+    test_coverage('test/dialog_coverage_form_filling').

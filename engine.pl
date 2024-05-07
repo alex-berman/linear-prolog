@@ -1,12 +1,7 @@
-:- module(library, [run/0]).
+:- module(engine, [assert_initial_facts/0, apply_rules_exhaustively/0, fact/1]).
 :- ensure_loaded(operators).
 
-:- dynamic fact/2.
-
-run :-
-    assert_initial_facts,
-    print_state,
-    apply_rules_exhaustively.
+:- dynamic fact/1.
 
 assert_initial_facts :-
     forall((_ :: Term, Term \= (_ -> _)),

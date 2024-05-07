@@ -7,20 +7,11 @@ The code is inspired by, and adapts examples from, the Haskell-based implementat
 Requirements: SWI Prolog
 
 ## Example
-`swipl -g run form_filling.pl`
+`swipl -g test form_filling.pl`
 
 should produce output akin to:
 
 ```
--------------------
-State:
-  heard(greet,user,system)
-  hasTurn(user)
-  moves([])
-  qud([])
-  tt(b18,t15,gotaplatsen,johanneberg)
-  tt(b55,t20,gotaplatsen,sciencePark)
-
 Applied: hearAndRemember
 -------------------
 State:
@@ -51,24 +42,14 @@ State:
   moves([(counterGreet,system,user),greet])
   hasTurn(user)
 
-Applied: q1
--------------------
-State:
-  qud([])
-  tt(b18,t15,gotaplatsen,johanneberg)
-  tt(b55,t20,gotaplatsen,sciencePark)
-  moves([(counterGreet,system,user),greet])
-  hasTurn(user)
-  heard(ask(question(user,time,_1256,tt(_1262,_1256,gotaplatsen,_1268))),user,system)
-
 Applied: hearAndRemember
 -------------------
 State:
   qud([])
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  moves([ask(question(user,time,_1356,tt(_1362,_1356,gotaplatsen,_1368))),(counterGreet,system,user),greet])
-  pending(ask(question(user,time,_1354,tt(_1360,_1354,gotaplatsen,_1366))),user,system)
+  moves([ask(question(user,time,_17846,tt(_17852,_17846,gotaplatsen,_17858))),(counterGreet,system,user),greet])
+  pending(ask(question(user,time,_17844,tt(_17850,_17844,gotaplatsen,_17856))),user,system)
   hasTurn(system)
 
 Applied: pushQUD
@@ -76,29 +57,18 @@ Applied: pushQUD
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  moves([ask(question(user,time,_1280,tt(_1286,_1280,gotaplatsen,_1292))),(counterGreet,system,user),greet])
+  moves([ask(question(user,time,_17938,tt(_17944,_17938,gotaplatsen,_17950))),(counterGreet,system,user),greet])
   hasTurn(system)
-  qud([question(user,time,_1276,tt(_1282,_1276,gotaplatsen,_1288))])
+  qud([question(user,time,_17934,tt(_17940,_17934,gotaplatsen,_17946))])
 
 Applied: produceCR
 -------------------
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  moves([ask(question(user,time,_1264,tt(_1270,_1264,gotaplatsen,_1276))),(counterGreet,system,user),greet])
+  moves([ask(question(user,time,_18106,tt(_18112,_18106,gotaplatsen,_18118))),(counterGreet,system,user),greet])
   hasTurn(system)
-  qud([question(user,time,_1260,tt(_1266,_1260,gotaplatsen,_1272))])
-  cr
-
-Applied: produceCR
--------------------
-State:
-  tt(b18,t15,gotaplatsen,johanneberg)
-  tt(b55,t20,gotaplatsen,sciencePark)
-  moves([ask(question(user,time,_1412,tt(_1418,_1412,gotaplatsen,_1424))),(counterGreet,system,user),greet])
-  hasTurn(system)
-  qud([question(user,time,_1408,tt(_1414,_1408,gotaplatsen,_1420))])
-  cr
+  qud([question(user,time,_18102,tt(_18108,_18102,gotaplatsen,_18114))])
   cr
 
 Applied: specificCR
@@ -106,42 +76,28 @@ Applied: specificCR
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  moves([ask(question(user,time,_1424,tt(_1430,_1424,gotaplatsen,_1436))),(counterGreet,system,user),greet])
+  moves([ask(question(user,time,_18166,tt(_18172,_18166,gotaplatsen,_18178))),(counterGreet,system,user),greet])
   hasTurn(system)
-  cr
-  qud([question(system,bus,_1420,wantBus(_1420)),question(user,time,_1440,tt(_1420,_1440,gotaplatsen,_1452))])
-  agenda(ask(question(system,bus,_1422,wantBus(_1422))),system,user)
+  qud([question(system,bus,_18162,wantBus(_18162)),question(user,time,_18182,tt(_18162,_18182,gotaplatsen,_18194))])
+  agenda(ask(question(system,bus,_18164,wantBus(_18164))),system,user)
 
 Applied: utterAndRemember
 -------------------
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  cr
-  qud([question(system,bus,_1388,wantBus(_1388)),question(user,time,_1408,tt(_1388,_1408,gotaplatsen,_1420))])
-  utter(ask(question(system,bus,_1390,wantBus(_1390))),system,user)
-  moves([(ask(question(system,bus,_1398,wantBus(_1398))),system,user),ask(question(user,time,_1428,tt(_1434,_1428,gotaplatsen,_1440))),(counterGreet,system,user),greet])
+  qud([question(system,bus,_17858,wantBus(_17858)),question(user,time,_17878,tt(_17858,_17878,gotaplatsen,_17890))])
+  utter(ask(question(system,bus,_17860,wantBus(_17860))),system,user)
+  moves([(ask(question(system,bus,_17868,wantBus(_17868))),system,user),ask(question(user,time,_17898,tt(_17904,_17898,gotaplatsen,_17910))),(counterGreet,system,user),greet])
   hasTurn(user)
-
-Applied: q2b
--------------------
-State:
-  tt(b18,t15,gotaplatsen,johanneberg)
-  tt(b55,t20,gotaplatsen,sciencePark)
-  cr
-  qud([question(system,bus,_1256,wantBus(_1256)),question(user,time,_1276,tt(_1256,_1276,gotaplatsen,_1288))])
-  moves([(ask(question(system,bus,_1266,wantBus(_1266))),system,user),ask(question(user,time,_1296,tt(_1302,_1296,gotaplatsen,_1308))),(counterGreet,system,user),greet])
-  hasTurn(user)
-  heard(assert(wantBus(b55)),user,system)
 
 Applied: hearAndRemember
 -------------------
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  cr
-  qud([question(system,bus,_1402,wantBus(_1402)),question(user,time,_1422,tt(_1402,_1422,gotaplatsen,_1434))])
-  moves([assert(wantBus(b55)),(ask(question(system,bus,_1426,wantBus(_1426))),system,user),ask(question(user,time,_1456,tt(_1462,_1456,gotaplatsen,_1468))),(counterGreet,system,user),greet])
+  qud([question(system,bus,_18842,wantBus(_18842)),question(user,time,_18862,tt(_18842,_18862,gotaplatsen,_18874))])
+  moves([assert(wantBus(b55)),(ask(question(system,bus,_18866,wantBus(_18866))),system,user),ask(question(user,time,_18896,tt(_18902,_18896,gotaplatsen,_18908))),(counterGreet,system,user),greet])
   pending(assert(wantBus(b55)),user,system)
   hasTurn(system)
 
@@ -150,19 +106,17 @@ Applied: processAssert
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  cr
-  moves([assert(wantBus(b55)),(ask(question(system,bus,_1340,wantBus(_1340))),system,user),ask(question(user,time,_1370,tt(_1376,_1370,gotaplatsen,_1382))),(counterGreet,system,user),greet])
+  moves([assert(wantBus(b55)),(ask(question(system,bus,_18964,wantBus(_18964))),system,user),ask(question(user,time,_18994,tt(_19000,_18994,gotaplatsen,_19006))),(counterGreet,system,user),greet])
   hasTurn(system)
   userFact(wantBus(b55))
-  qud([question(user,time,_1316,tt(b55,_1316,gotaplatsen,_1328))])
+  qud([question(user,time,_18940,tt(b55,_18940,gotaplatsen,_18952))])
 
 Applied: produceAnswer
 -------------------
 State:
   tt(b18,t15,gotaplatsen,johanneberg)
   tt(b55,t20,gotaplatsen,sciencePark)
-  cr
-  moves([assert(wantBus(b55)),(ask(question(system,bus,_1490,wantBus(_1490))),system,user),ask(question(user,time,_1520,tt(_1526,_1520,gotaplatsen,_1532))),(counterGreet,system,user),greet])
+  moves([assert(wantBus(b55)),(ask(question(system,bus,_19116,wantBus(_19116))),system,user),ask(question(user,time,_19146,tt(_19152,_19146,gotaplatsen,_19158))),(counterGreet,system,user),greet])
   hasTurn(system)
   userFact(wantBus(b55))
   agenda(shortAnswer(time,t20),system,user)
@@ -178,6 +132,6 @@ State:
   qud([])
   answered(question(user,time,t20,tt(b55,t20,gotaplatsen,sciencePark)))
   utter(shortAnswer(time,t20),system,user)
-  moves([(shortAnswer(time,t20),system,user),assert(wantBus(b55)),(ask(question(system,bus,_1474,wantBus(_1474))),system,user),ask(question(user,time,_1504,tt(_1510,_1504,gotaplatsen,_1516))),(counterGreet,system,user),greet])
+  moves([(shortAnswer(time,t20),system,user),assert(wantBus(b55)),(ask(question(system,bus,_18894,wantBus(_18894))),system,user),ask(question(user,time,_18924,tt(_18930,_18924,gotaplatsen,_18936))),(counterGreet,system,user),greet])
   hasTurn(user)
 ```

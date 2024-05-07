@@ -1,12 +1,5 @@
-:- use_module(engine).
 :- ensure_loaded(operators).
-
-% simulating user moves
-_ :: start.
-start :: (start -> heard(ask(question(user, road, R, pick(route(R, home)))), user, system)).
-whyShort :: (utter(shortAnswer(road, bypass), system, user) ->
-		 heard(ask(question(user, reason, T, topos(T))), user, system)).
-
+:- use_module(coverage_testing).
 
 % initial state
 ready :: hasTurn(user).
@@ -56,3 +49,7 @@ toposShorter :: ([^qud([question(user, road, X, pick(route(X, Y)))|_]),
 		     [pick(route(X, Y)),
 		      topos(shortest(route, X, Y)),
 		      enthymeme(shortest, pickRoute(X, Y))]).
+
+
+test :-
+    test_coverage('test/dialog_coverage_enthymemes').
