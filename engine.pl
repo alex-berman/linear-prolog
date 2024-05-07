@@ -6,23 +6,30 @@
 run :-
     assert_initial_facts,
     print_state,
-    repeat,
-    ( bagof(RuleName :: (Antecedent -> Consequent),
-	  (RuleName :: (Antecedent -> Consequent), antecedent_holds(Antecedent)),
-	  ApplicableRules) ->
-	  forall(member(RuleName :: (Antecedent -> Consequent), ApplicableRules),
-		 (
-		     consume(Antecedent),
-		     establish(Consequent),
-		     write('Applied: '), write(RuleName), nl,
-		     print_state
-		 )),
-	  fail
-     ; true ).
+    apply_rules_exhaustively.
 
 assert_initial_facts :-
     forall((_ :: Term, Term \= (_ -> _)),
 	   assert(fact(Term))).
+
+apply_rules_exhaustively :-
+    bagof(RuleName :: (Antecedent -> Consequent), RuleName :: (Antecedent -> Consequent), Rules),
+    repeat,
+    apply_and_count(Rules, N),
+    N == 0. % repeat if at least one rule applied
+
+apply_and_count([], 0).
+apply_and_count([RuleName :: (Antecedent -> Consequent)|Rules], N) :-
+    RuleName :: (Antecedent -> Consequent),
+    ( antecedent_holds(Antecedent) ->
+      consume(Antecedent),
+      establish(Consequent),
+      write('Applied: '), write(RuleName), nl,
+      print_state,
+      ThisN = 1
+    ; ThisN = 0),
+    apply_and_count(Rules, RestN),
+    N is ThisN + RestN.
 
 print_state :-
     write('-------------------\nState:\n'),
