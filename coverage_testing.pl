@@ -4,7 +4,8 @@
 test_coverage(Path) :-
     ensure_loaded(Path),
     forall(test(Turns),
-	   (assert_initial_facts, test_turns(Turns))).
+      (assert_initial_facts, test_turns(Turns))),
+    write('OK\n').
 
 test_turns([]).
 test_turns([heard(UserMove, user, system), utter(ExpectedSystemMove, system, user)|Turns]) :-

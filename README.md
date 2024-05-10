@@ -7,7 +7,7 @@ The code is inspired by, and adapts examples from, the Haskell-based implementat
 Requirements: SWI Prolog
 
 ## Example
-`swipl -g test form_filling.pl`
+`swipl -t test form_filling.pl`
 
 should produce output akin to:
 
