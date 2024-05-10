@@ -46,10 +46,6 @@ produceCR :: ([^qud([question(user, _, _, P)|_]),
 
 % === DOMAIN KNOWLEDGE ===
 
-% knowledge base 1 (no CR)
-kb1 :: tt(b18, t15, gotaplatsen,     johanneberg).
-kb2 :: tt(b55, t20, gotaplatsen,     sciencePark).
-
 specificCR :: ([cr,
 		qud([question(user, time, T, tt(N, T, S, D))|Qs])] ->
 		   [qud([question(system, bus, N, wantBus(N)),

@@ -3,10 +3,13 @@
 
 test_coverage(Path) :-
     ensure_loaded(Path),
-    forall(test(Turns),
-      (assert_initial_facts, test_turns(Turns))),
+    forall(test(Facts, Turns), run_test(Facts, Turns)),
     write('OK\n').
 
+run_test(Facts, Turns) :-
+    assert_initial_facts,
+    forall(member(Fact, Facts), assert(engine:fact(Fact))),
+    test_turns(Turns).
 
 test_turns([]) :- !.
 
@@ -18,7 +21,6 @@ test_turns(Turns) :-
 	  test_turns(TurnsTail)
      ; throw(error(type_error(NonUnifiedExpectedFormat, Turns)))
     ).
-
 
 test_turn(UserMove, ExpectedSystemMove) :-
     assert(engine:fact(heard(UserMove))),

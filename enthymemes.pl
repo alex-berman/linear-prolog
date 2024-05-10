@@ -35,14 +35,6 @@ produceAnswerShort :: ([qud([question(user, A, X, P)|Qs]),
 
 % === DOMAIN KNOWLEDGE ===
 
-% knowledge base	
-d1 :: route(bypass, home).
-d2 :: route(parkLane, home).
-d3 :: route(bridgeRoute, home).
-r1 :: shortest(route(bypass, home)).
-r2 :: cheapest(route(parkLane, home)).
-r3 :: prettiest(route(bridgeRoute, home)).
-
 toposShorter :: ([^qud([question(user, road, X, pick(route(X, Y)))|_]),
 		  route(X, Y),
 		  ^shortest(route(X, Y))] ->
