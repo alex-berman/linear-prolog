@@ -13,17 +13,11 @@ run_test(Facts, Turns) :-
 
 test_turns([]) :- !.
 
-test_turns(Turns) :-
-    ExpectedFormat = [heard(UserMove), utter(ExpectedSystemMove)|TurnsTail],
-    copy_term(ExpectedFormat, NonUnifiedExpectedFormat),
-    ( Turns = ExpectedFormat ->
-	  test_turn(UserMove, ExpectedSystemMove),
-	  test_turns(TurnsTail)
-     ; throw(error(type_error(NonUnifiedExpectedFormat, Turns)))
-    ).
+test_turns([Turn|TurnsTail]) :-
+    test_turn(Turn),
+    test_turns(TurnsTail).
 
-test_turn(UserMove, ExpectedSystemMove) :-
-    assert(engine:fact(heard(UserMove))),
+test_turn(utter(ExpectedSystemMove)) :-
     apply_rules_exhaustively,
     !,
     ( engine:fact(utter(ActualSystemMove)) ->
@@ -36,3 +30,6 @@ test_turn(UserMove, ExpectedSystemMove) :-
      ;
      write('Expected '), write(ExpectedSystemMove), write(' but did not get any system move'), nl, fail
     ).
+
+test_turn(heard(UserMove)) :-
+    assert(engine:fact(heard(UserMove))).
