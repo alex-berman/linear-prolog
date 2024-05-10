@@ -11,7 +11,7 @@ test_coverage(Path) :-
 test_turns([]) :- !.
 
 test_turns(Turns) :-
-    ExpectedFormat = [heard(UserMove, user, system), utter(ExpectedSystemMove, system, user)|TurnsTail],
+    ExpectedFormat = [heard(UserMove), utter(ExpectedSystemMove)|TurnsTail],
     copy_term(ExpectedFormat, NonUnifiedExpectedFormat),
     ( Turns = ExpectedFormat ->
 	  test_turn(UserMove, ExpectedSystemMove),
@@ -21,12 +21,12 @@ test_turns(Turns) :-
 
 
 test_turn(UserMove, ExpectedSystemMove) :-
-    assert(engine:fact(heard(UserMove, user, system))),
+    assert(engine:fact(heard(UserMove))),
     apply_rules_exhaustively,
     !,
-    ( engine:fact(utter(ActualSystemMove, system, user)) ->
+    ( engine:fact(utter(ActualSystemMove)) ->
       (ActualSystemMove = ExpectedSystemMove ->
-	   retract(engine:fact(utter(ExpectedSystemMove, system, user)))
+	   retract(engine:fact(utter(ExpectedSystemMove)))
       ;
       write('Expected '), write(ExpectedSystemMove), write(' but got '), write(ActualSystemMove), nl,
       fail

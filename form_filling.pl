@@ -7,36 +7,36 @@ noMoves :: moves([]).
 noQud :: qud([]).
 
 
-utterAndRemember :: ([agenda(M, X, Y),
+utterAndRemember :: ([agenda(M),
 		      moves(Ms),
-		      hasTurn(X)] ->
-			 [utter(M, X, Y),
-			  moves([(M, X, Y)|Ms]),
-			  hasTurn(Y)]).
+		      hasTurn(system)] ->
+			 [utter(M),
+			  moves([M|Ms]),
+			  hasTurn(user)]).
 
-hearAndRemember :: ([heard(M, X, Y),
+hearAndRemember :: ([heard(M),
 		     moves(Ms),
-		     hasTurn(X)] ->
+		     hasTurn(user)] ->
 			[moves([M|Ms]),
-			 pending(M, X, Y),
-			 hasTurn(Y)]).
+			 pending(M),
+			 hasTurn(system)]).
 
-counterGreeting :: ([^hasTurn(X),
-		     pending(greet, Y, X)] ->
-			[agenda(counterGreet, X, Y)]).
+counterGreeting :: ([^hasTurn(system),
+		     pending(greet)] ->
+			[agenda(counterGreet)]).
 
-processAssert :: ([pending(assert(P), _, DP),
-		   qud([question(DP, _, _, P)|Qs])] ->
+processAssert :: ([pending(assert(P)),
+		   qud([question(system, _, _, P)|Qs])] ->
 		      [userFact(P),
 		       qud(Qs)]).
 
-pushQUD :: ([pending(ask(Q), _, _),
+pushQUD :: ([pending(ask(Q)),
 	     qud(Qs)] ->
 		qud([Q|Qs])).
 
 produceAnswer :: ([qud([question(user, A, X, P)|Qs]),
 		   !P] ->
-		      [agenda(shortAnswer(A, X), system, user),
+		      [agenda(shortAnswer(A, X)),
 		       qud(Qs),
 		       answered(question(user, A, X, P))]).
 
@@ -54,7 +54,7 @@ specificCR :: ([cr,
 		qud([question(user, time, T, tt(N, T, S, D))|Qs])] ->
 		   [qud([question(system, bus, N, wantBus(N)),
 			 question(user, time, T, tt(N, T, S, D))|Qs]),
-		    agenda(ask(question(system, bus, N, wantBus(N))), system, user)]).
+		    agenda(ask(question(system, bus, N, wantBus(N))))]).
 
 
 test :-
