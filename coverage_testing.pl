@@ -23,11 +23,14 @@ test_turns(Turns) :-
 test_turn(UserMove, ExpectedSystemMove) :-
     assert(engine:fact(heard(UserMove, user, system))),
     apply_rules_exhaustively,
+    !,
     ( engine:fact(utter(ActualSystemMove, system, user)) ->
       (ActualSystemMove = ExpectedSystemMove ->
 	   retract(engine:fact(utter(ExpectedSystemMove, system, user)))
       ;
-      write('Expected '), write(ExpectedSystemMove), write(' but got '), write(ActualSystemMove), nl
+      write('Expected '), write(ExpectedSystemMove), write(' but got '), write(ActualSystemMove), nl,
+      fail
       )
-    ;
-    write('Expected '), write(ExpectedSystemMove), write(' but did not get any system move'), nl ).
+     ;
+     write('Expected '), write(ExpectedSystemMove), write(' but did not get any system move'), nl, fail
+    ).
