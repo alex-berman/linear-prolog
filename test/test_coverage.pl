@@ -1,8 +1,8 @@
-:- module(coverage_testing, [test_coverage/1]).
 :- use_module(engine).
 
-test_coverage(Path) :-
-    ensure_loaded(Path),
+test_coverage(DialogPath, TestPath) :-
+    ensure_loaded(DialogPath),
+    ensure_loaded(TestPath),
     forall(test(Facts, Turns), run_test(Facts, Turns)),
     write('OK\n').
 

@@ -1,5 +1,4 @@
 :- ensure_loaded(operators).
-:- use_module(coverage_testing).
 
 % initial state
 ready :: hasTurn(user).
@@ -41,7 +40,3 @@ toposShorter :: ([^qud([question(user, road, X, pick(route(X, Y)))|_]),
 		     [pick(route(X, Y)),
 		      topos(shortest(route, X, Y)),
 		      enthymeme(shortest, pickRoute(X, Y))]).
-
-
-test :-
-    test_coverage('test/dialog_coverage_enthymemes').

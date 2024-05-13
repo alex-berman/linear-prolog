@@ -1,5 +1,4 @@
 :- ensure_loaded(operators).
-:- use_module(coverage_testing).
 
 % initial state
 ready :: hasTurn(user).
@@ -51,7 +50,3 @@ specificCR :: ([cr,
 		   [qud([question(system, bus, N, wantBus(N)),
 			 question(user, time, T, tt(N, T, S, D))|Qs]),
 		    agenda(ask(question(system, bus, N, wantBus(N))))]).
-
-
-test :-
-    test_coverage('test/dialog_coverage_form_filling').

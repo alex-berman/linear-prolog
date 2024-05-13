@@ -7,7 +7,7 @@ The code is inspired by, and adapts examples from, the Haskell-based implementat
 Requirements: SWI Prolog
 
 ## Example
-`swipl -t test form_filling.pl`
+`swipl -t 'test_coverage(form_filling, test/dialog_coverage_form_filling)' test/test_coverage.pl`
 
 should produce output akin to:
 
@@ -134,4 +134,6 @@ State:
   utter(shortAnswer(time,t20),system,user)
   moves([(shortAnswer(time,t20),system,user),assert(wantBus(b55)),(ask(question(system,bus,_18894,wantBus(_18894))),system,user),ask(question(user,time,_18924,tt(_18930,_18924,gotaplatsen,_18936))),(counterGreet,system,user),greet])
   hasTurn(user)
+
+OK
 ```

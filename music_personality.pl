@@ -1,5 +1,4 @@
 :- ensure_loaded(operators).
-:- use_module(coverage_testing).
 
 
 _ :: agenda(respond(booleanQuestion(extraverted))).
@@ -18,7 +17,3 @@ relevant_answer(Q, not(P)) :-
     relevant_answer(Q, P).
 
 relevant_answer(booleanQuestion(Pred), Pred).
-
-
-test :-
-    test_coverage('test/dialog_coverage_music_personality').
