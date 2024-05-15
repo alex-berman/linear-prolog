@@ -1,2 +1,5 @@
-test([not(extraverted)],
-     [utter(assert(not(extraverted)))]).
+prediction_introverted{
+	facts: [not(extraverted)],
+	turns: [utter(assert(not(extraverted)))]
+    }.
+
