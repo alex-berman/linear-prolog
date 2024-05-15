@@ -11,7 +11,7 @@ explanation_for_prediction{
 	],
 	turns: [
 	    utter(assert(not(extraverted))),
-	    heard(ask(why)),
+	    heard(ask(why(_))),
 	    utter(assert(not(high_value(danceability_mean))))
 	]
     }.

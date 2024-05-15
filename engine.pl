@@ -50,6 +50,9 @@ antecedent_holds(!Proposition) :- % check if proposition is unique (roughly corr
     length(Solutions, N),
     N == 1,
     Solutions = [Proposition]. % unify with the unique solution
+antecedent_holds(\+P) :- % check if proposition does NOT hold
+    !,
+    \+ fact(P).
 antecedent_holds($Condition) :-
     !,
     Condition.
@@ -65,6 +68,7 @@ consume(^_) :- !. % don't consume premises that are reproduced
 consume(?_) :- !. % don't consume content of non-uniqueness test
 consume(!_) :- !. % don't consume content of uniqueness test
 consume($_) :- !. % don't consume Prolog-native conditions
+consume(\+_) :- !. % don't consume negation test
 consume(Proposition) :-
     retract(fact(Proposition)).
 
