@@ -11,15 +11,23 @@ integrateUserAsk :: (non_integrated_move(ask(Q)) ->
 			 [qud(Q),
 			  agenda(respond(Q))]).
 
-getExplanans :: ([^agenda(respond(why(Explanandum))),
-		  ^supports(Explanans, Explanandum),
-		  \+explanans(Explanans)] ->
-		     explanans(Explanans)).
+resolveWhyQuestionEllipsis :: ([agenda(respond(why(P))),
+				$var(P),
+				^previous_system_move(assert(Q))] ->
+				   agenda(respond(why(Q)))).
+
+answerEhtymematically :: ([agenda(respond(why(Explanandum))),
+			   ^supports(Explanans, Explanandum)] ->
+			      next_system_move(assert(Explanandum))).
 
 assertRelevantAnswer :: ([agenda(respond(Q)),
 			  ^P,
 			  $relevant_answer(Q, P)] ->
-			     utter(assert(P))).
+			     next_system_move(assert(P))).
+
+utterAndRemember :: (next_system_move(M) ->
+			 [utter(M),
+			  previous_system_move(M)]).
 
 
 relevant_answer(Q, not(P)) :-
