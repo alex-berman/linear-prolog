@@ -1,4 +1,4 @@
-:- module(engine, [assert_initial_facts/0, apply_rules_exhaustively/0, fact/1]).
+:- module(engine, [assert_initial_facts/0, apply_rules_exhaustively/0, fact/1, clear_facts/0]).
 :- ensure_loaded(operators).
 
 :- dynamic fact/1.
@@ -75,3 +75,6 @@ establish([Head|Tail]) :-
     establish(Tail).
 establish(Proposition) :-
     assert(fact(Proposition)).
+
+clear_facts :-
+    retractall(fact(_)).

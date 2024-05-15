@@ -1,15 +1,20 @@
+:- use_module(library(readutil), [read_file_to_terms/3]).
 :- use_module(engine).
 
 test_coverage(DialogPath, TestPath) :-
     ensure_loaded(DialogPath),
-    ensure_loaded(TestPath),
-    forall(test(Facts, Turns), run_test(Facts, Turns)),
+    read_file_to_terms(TestPath, Tests, []),
+    forall(member(Test, Tests), run_test(Test)),
     write('OK\n').
 
-run_test(Facts, Turns) :-
-    assert_initial_facts,
-    forall(member(Fact, Facts), assert(engine:fact(Fact))),
-    test_turns(Turns).
+run_test(Test) :-
+    ( is_dict(Test, TestName) ->
+	  write('\nRunning test '), write(TestName), nl, nl,
+	  clear_facts,
+	  assert_initial_facts,
+	  forall(member(Fact, Test.facts), assert(engine:fact(Fact))),
+	  test_turns(Test.turns)
+     ; write('Expected a dict but got '), write(Test), nl, fail ).
 
 test_turns([]) :- !.
 
